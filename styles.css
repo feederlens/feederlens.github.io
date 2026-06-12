@@ -522,6 +522,71 @@ a { color: var(--accent); text-decoration: none; }
   opacity: 0.5;
 }
 
+/* ── Use Cases ── */
+.use-cases {
+  border-top: 1px solid var(--border);
+}
+
+.usecase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 56px;
+}
+
+.usecase-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  transition: border-color 0.3s;
+}
+
+.usecase-card:hover { border-color: rgba(42, 166, 160, 0.3); }
+
+.usecase-icon {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: var(--accent-dim);
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.usecase-icon svg { width: 22px; height: 22px; }
+
+.usecase-title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.usecase-problem {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.usecase-outcome {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.usecase-outcome strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+@media (max-width: 900px) {
+  .usecase-grid { grid-template-columns: 1fr; max-width: 480px; margin-left: auto; margin-right: auto; }
+}
+
 /* ── Why Now ── */
 .why-now {
   border-top: 1px solid var(--border);
