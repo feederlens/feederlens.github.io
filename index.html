@@ -41,9 +41,9 @@
     *{box-sizing:border-box}
     img{max-width:100%;height:auto}
     ::selection{background:rgba(77,182,172,.25)}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;font-size:106.25%}  /* 17px 基准:全站 rem 同步放大 */
     body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
-      font-size:15.5px;line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+      font-size:1rem;line-height:1.72;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
       background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
       background-size:54px 54px;background-position:center;}
     body::before{content:"";position:fixed;inset:0;background:radial-gradient(120% 80% at 50% -10%,#252a33 0%,var(--bg) 62%);z-index:-1}
@@ -63,6 +63,10 @@
     .badge{font-family:var(--mono);font-size:.68rem;color:var(--cyan);border:1px solid var(--cyan-dim);
       border-radius:3px;padding:4px 9px;white-space:nowrap;background:rgba(86,182,194,.05)}
     .badge .dot{color:var(--dim)}
+    .badge{animation:breathe 4s ease-in-out infinite}
+    @keyframes breathe{0%,100%{box-shadow:0 0 0 rgba(77,182,172,0)}50%{box-shadow:0 0 12px rgba(77,182,172,.18)}}
+    .caret{display:inline-block;width:.55em;height:1.05em;background:var(--cyan);vertical-align:text-bottom;margin-left:2px;animation:blink 1.15s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
 
     /* Hero */
     .hero{padding:clamp(64px,10vw,104px) 0 clamp(56px,8vw,80px);border-bottom:1px solid var(--line)}
@@ -137,6 +141,7 @@
     @media (prefers-reduced-motion:reduce){
       html{scroll-behavior:auto}
       .btn,.stage{transition:none}
+      .badge,.caret{animation:none}
     }
   </style>
 </head>
@@ -163,7 +168,7 @@
     <div class="wrap">
       <div class="label">Independent Research Initiative &nbsp;·&nbsp; FeederLens LLC (WA)</div>
       <h1>Modeling Continental<br>Grid Vulnerabilities</h1>
-      <p class="lede"><b>FeederLens LLC</b> serves as the legal entity for an independent research initiative. We explore non-linear transformations of real-time power-network telemetry to abstract physical constraints into derived mathematical models.</p>
+      <p class="lede"><b>FeederLens LLC</b> is the legal home of one independent research project: measuring stress on the North American power grid from public telemetry, and compressing it into derived indices that can be discussed openly &mdash; without redistributing anyone's raw data.</p>
       <a href="#methodology" class="btn mono">View Research Methodology <span class="arw">&#8595;</span></a>
     </div>
   </section>
@@ -175,7 +180,7 @@
         <div class="label">// 01 — Research Protocol</div>
         <h2>The FeederLens Grid Stress Index<span class="tm">&#8482;</span> (FGSI) Protocol</h2>
       </div>
-      <p class="body">Our current research focuses on the mathematical abstraction of raw ISO data. Through dynamic <b>Z-score normalizations</b> and <b>Bayesian multi-nodal modeling</b>, we are exploring ways to translate physical grid slack into a mathematically irreversible <b>0&ndash;100 heuristic index</b>.</p>
+      <p class="body">The core of the current work is a one-way abstraction. Raw grid constraints pass through a <b>30-day rolling Z-score</b>, then a sigmoid squash onto a <b>0&ndash;100 scale</b>. The proprietary baseline never leaves the pipeline, so the published number cannot be inverted back to the source series &mdash; that is the whole point.</p>
 
       <div class="term">
         <div class="term-bar">
@@ -189,7 +194,7 @@
   <span class="k">"fgsi"</span>: <span class="n">82</span>,
   <span class="k">"band"</span>: <span class="s">"AMBER"</span>,
   <span class="k">"structural_observation"</span>: <span class="s">"Elevated local scarcity detected during solar ramp-down."</span>
-}</pre>
+}<span class="caret" aria-hidden="true"></span></pre>
       </div>
     </div>
   </section>
@@ -206,19 +211,19 @@
         <!-- RESEARCH-LOG:INSERT -->
         <div class="row">
           <span class="dt">2026-07-17</span>
-          <span class="en"><b>Structural Lag Refinement.</b> Corrected the chronological attribution window from 30 days down to a 6-day tight window, significantly reducing noise in mapping physical grid stress to downstream sector reactions.<span class="tag">attribution-window</span></span>
+          <span class="en"><b>Structural Lag Refinement.</b> Cut the attribution window from 30 days to 6. Most of the sector reaction worth measuring happens inside a week; the longer window was mostly noise.<span class="tag">attribution-window</span></span>
         </div>
         <div class="row">
           <span class="dt">2026-07-15</span>
-          <span class="en"><b>Regression Net Preservation.</b> Formalized the decision to reject the archiving of consistently passing test cases. The value of the 1,300+ case test suite lies in its rigid regression net; optimization focused elsewhere as CI latency remains non-blocking.<span class="tag">ci-cd-philosophy</span></span>
+          <span class="en"><b>Regression Net Preservation.</b> Decided against pruning tests that always pass. A regression net earns its keep precisely by never firing &mdash; and the 1,300+ case suite runs in under 15 seconds, so there was nothing to save anyway.<span class="tag">ci-cd-philosophy</span></span>
         </div>
         <div class="row">
           <span class="dt">2026-07-09</span>
-          <span class="en"><b>Dormant Module Retention.</b> Established the "zero-trigger" philosophy for infrastructure insurance modules. Modules monitoring hurricanes, nuclear operations, and carbon registries are retained active despite long periods of inactivity&mdash;a fuse isn't removed just because there is no fire.<span class="tag">tail-risk-safeguards</span></span>
+          <span class="en"><b>Dormant Module Retention.</b> Kept the hurricane, nuclear-outage and carbon-registry monitors armed despite months of zero triggers. A fuse isn't removed just because there is no fire.<span class="tag">tail-risk-safeguards</span></span>
         </div>
         <div class="row">
           <span class="dt">2026-07-04</span>
-          <span class="en"><b>Deterministic-First Ingestion.</b> Committed to official machine-readable sources over LLM extraction wherever they exist: interconnection-queue workbooks (xlsx/csv/json) are parsed deterministically in Python, reserving model-based retrieval for sources with no structured feed.<span class="tag">data-lake-optimization</span></span>
+          <span class="en"><b>Deterministic-First Ingestion.</b> Where an official machine-readable file exists, parse it; save language models for sources that have no structured feed. Interconnection-queue workbooks now come in as plain xlsx/csv, deterministically.<span class="tag">data-lake-optimization</span></span>
         </div>
       </div>
     </div>
@@ -233,10 +238,10 @@
       </div>
       <p class="body" style="margin-bottom:8px">A heterogeneous, deterministic-first pipeline: public telemetry in, derived structural heuristics out. Every figure is traceable to a public source.</p>
       <div class="arch">
-        <div class="stage"><span class="no">01</span><div><h3>Deterministic Telemetry Ingestion (Python)</h3><p>Official machine-readable feeds &mdash; interconnection-queue workbooks, EIA-930 hourly telemetry, public LMP archives &mdash; parsed deterministically with per-region isolation: one source failing never poisons the continental picture.</p></div></div>
-        <div class="stage"><span class="no">02</span><div><h3>Merit-Order Dispatch Modeling (Python)</h3><p>Python-based abstract modeling of dispatch equations, applying dynamic weighted multipliers to map physical constraints against fundamental priors.</p></div></div>
-        <div class="stage"><span class="no">03</span><div><h3>Regression &amp; CI/CD Governance</h3><p>A zero-tolerance continuous integration protocol. The system maintains a strict 1,300+ case regression suite (sub-15s execution) to ensure absolute structural stability across iterative changes.</p></div></div>
-        <div class="stage"><span class="no">04</span><div><h3>Fail-Safe Insurance Modules</h3><p>Isolated, dormant monitoring gateways (Hurricane Shield, Nuclear Outage, Carbon Registry) that ensure graceful system degradation and alert routing during extreme physical tail-risk events.</p></div></div>
+        <div class="stage"><span class="no">01</span><div><h3>Deterministic Telemetry Ingestion (Python)</h3><p>Interconnection-queue workbooks, EIA-930 hourly telemetry and public LMP archives, parsed deterministically. Regions are isolated: one dark feed never poisons the continental picture.</p></div></div>
+        <div class="stage"><span class="no">02</span><div><h3>Merit-Order Dispatch Modeling (Python)</h3><p>Merit-order dispatch models in Python. Fuel cost plus carbon shadow price reorders the stack; a weighted multiplier ties regional slack back to fundamental priors.</p></div></div>
+        <div class="stage"><span class="no">03</span><div><h3>Regression &amp; CI/CD Governance</h3><p>Every change runs the full 1,300+ case regression suite before it lands &mdash; under 15 seconds. If a test fails, nothing ships.</p></div></div>
+        <div class="stage"><span class="no">04</span><div><h3>Fail-Safe Insurance Modules</h3><p>Dormant watchdogs &mdash; hurricane demand shield, nuclear-outage monitor, carbon registry &mdash; stay armed through long quiet stretches, and degradation is always regional: the run finishes even when a source does not.</p></div></div>
       </div>
     </div>
   </section>
