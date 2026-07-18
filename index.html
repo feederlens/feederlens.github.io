@@ -47,7 +47,7 @@
       background-image:linear-gradient(rgba(255,255,255,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.022) 1px,transparent 1px);
       background-size:54px 54px;background-position:center;}
     body::before{content:"";position:fixed;inset:0;background:radial-gradient(120% 80% at 50% -10%,#252a33 0%,var(--bg) 62%);z-index:-1}
-    .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+    .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
     a{color:var(--cyan);text-decoration:none}
     .mono{font-family:var(--mono)}
     .label{font-family:var(--mono);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
@@ -69,7 +69,14 @@
     @keyframes blink{50%{opacity:0}}
 
     /* Hero */
-    .hero{padding:clamp(64px,10vw,104px) 0 clamp(56px,8vw,80px);border-bottom:1px solid var(--line)}
+    .hero{padding:clamp(64px,9vw,96px) 0 clamp(56px,8vw,80px);border-bottom:1px solid var(--line)}
+    .hero .wrap{display:grid;grid-template-columns:1fr;gap:40px;align-items:center}
+    .hero-art{display:none}
+    @media (min-width:980px){
+      .hero .wrap{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}
+      .hero-art{display:flex;justify-content:center}
+      .hero-art img{width:min(320px,90%);filter:drop-shadow(0 0 46px rgba(77,182,172,.16));opacity:.94}
+    }
     .hero .label{margin-bottom:22px}
     h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.18;letter-spacing:-.015em;margin:0 0 26px;font-weight:600;text-wrap:balance}
     .lede{font-size:1.1rem;color:var(--dim);max-width:60ch;margin:0 0 38px;line-height:1.8;text-wrap:pretty}
@@ -89,6 +96,11 @@
     .cyan{color:var(--cyan)}
 
     /* Terminal mock */
+    .meth{display:grid;grid-template-columns:1fr;gap:8px 44px;align-items:start}
+    @media (min-width:980px){
+      .meth{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
+      .meth .term{margin-top:6px}
+    }
     .term{margin-top:32px;border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:var(--panel)}
     .term-bar{display:flex;align-items:center;gap:7px;padding:9px 13px;border-bottom:1px solid var(--line);background:var(--panel2)}
     .term-bar i{width:10px;height:10px;border-radius:50%;background:#2A2A2A;display:inline-block}
@@ -108,7 +120,8 @@
     .log .tag{font-family:var(--mono);font-size:.66rem;color:var(--faint);border:1px solid var(--line2);border-radius:3px;padding:1px 6px;margin-left:8px;white-space:nowrap}
 
     /* Architecture */
-    .arch{margin-top:10px;display:grid;gap:12px}
+    .arch{margin-top:10px;display:grid;gap:14px}
+    @media (min-width:900px){.arch{grid-template-columns:1fr 1fr}}
     .stage{display:grid;grid-template-columns:34px 1fr;gap:16px;border:1px solid var(--line);border-radius:10px;padding:18px 20px;background:var(--panel);transition:border-color .2s ease}
     .stage:hover{border-color:var(--line2)}
     .stage .no{font-family:var(--mono);font-size:.78rem;color:var(--cyan)}
@@ -166,10 +179,13 @@
   <!-- 2. Hero -->
   <section class="hero">
     <div class="wrap">
-      <div class="label">Independent Research Initiative &nbsp;·&nbsp; FeederLens LLC (WA)</div>
-      <h1>Modeling Continental<br>Grid Vulnerabilities</h1>
-      <p class="lede"><b>FeederLens LLC</b> is the legal home of one independent research project: measuring stress on the North American power grid from public telemetry, and compressing it into derived indices that can be discussed openly &mdash; without redistributing anyone's raw data.</p>
-      <a href="#methodology" class="btn mono">View Research Methodology <span class="arw">&#8595;</span></a>
+      <div>
+        <div class="label">Independent Research Initiative &nbsp;·&nbsp; FeederLens LLC (WA)</div>
+        <h1>Modeling Continental<br>Grid Vulnerabilities</h1>
+        <p class="lede"><b>FeederLens LLC</b> is the legal home of one independent research project: measuring stress on the North American power grid from public telemetry, and compressing it into derived indices that can be discussed openly &mdash; without redistributing anyone's raw data.</p>
+        <a href="#methodology" class="btn mono">View Research Methodology <span class="arw">&#8595;</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true"><img src="assets/mark-480.png" alt="" width="320" height="320" loading="lazy"></div>
     </div>
   </section>
 
@@ -180,6 +196,7 @@
         <div class="label">// 01 — Research Protocol</div>
         <h2>The FeederLens Grid Stress Index<span class="tm">&#8482;</span> (FGSI) Protocol</h2>
       </div>
+      <div class="meth">
       <p class="body">The core of the current work is a one-way abstraction. Raw grid constraints pass through a <b>30-day rolling Z-score</b>, then a sigmoid squash onto a <b>0&ndash;100 scale</b>. The proprietary baseline never leaves the pipeline, so the published number cannot be inverted back to the source series &mdash; that is the whole point.</p>
 
       <div class="term">
@@ -195,6 +212,7 @@
   <span class="k">"band"</span>: <span class="s">"AMBER"</span>,
   <span class="k">"structural_observation"</span>: <span class="s">"Elevated local scarcity detected during solar ramp-down."</span>
 }<span class="caret" aria-hidden="true"></span></pre>
+      </div>
       </div>
     </div>
   </section>
